@@ -45,8 +45,13 @@ IF ( glew-cmake_BUILD_STATIC )
 		ADD_LIBRARY( libglew_static STATIC ${LIBGLEW_SRCS} )
 
 		SET_TARGET_PROPERTIES( libglew_static PROPERTIES
+                                       PREFIX ""
 		                       ARCHIVE_OUTPUT_NAME "glew"
 		                       DEBUG_POSTFIX d )
+		IF (WIN32)
+			SET_TARGET_PROPERTIES( libglew_static PROPERTIES
+				       SUFFIX ".lib" )
+		ENDIF()
 		TARGET_INCLUDE_DIRECTORIES( libglew_static PUBLIC ${INCLUDE_DIR} )
 		TARGET_COMPILE_DEFINITIONS( libglew_static PUBLIC GLEW_STATIC )
 		TARGET_LINK_LIBRARIES( libglew_static ${GL_LIBRARY} ${PLATFORM_SPECIFIC_LIBRARIES} )
@@ -57,8 +62,13 @@ IF ( glew-cmake_BUILD_STATIC )
 		ADD_LIBRARY( libglewmx_static STATIC ${LIBGLEW_SRCS} )
 
 		SET_TARGET_PROPERTIES( libglewmx_static PROPERTIES
+                                       PREFIX ""
 		                       ARCHIVE_OUTPUT_NAME "glewmx"
 		                       DEBUG_POSTFIX d )
+		IF (WIN32)
+			SET_TARGET_PROPERTIES( libglewmx_static PROPERTIES
+				       SUFFIX ".lib" )
+		ENDIF()
 		TARGET_COMPILE_DEFINITIONS( libglewmx_static INTERFACE GLEW_MX)
 		TARGET_INCLUDE_DIRECTORIES( libglewmx_static PUBLIC ${INCLUDE_DIR} )
 		TARGET_COMPILE_DEFINITIONS( libglewmx_static PUBLIC GLEW_STATIC )
@@ -72,6 +82,7 @@ IF ( glew-cmake_BUILD_SHARED )
 		ADD_LIBRARY( libglew_shared SHARED ${LIBGLEW_SRCS} )
 
 		SET_TARGET_PROPERTIES( libglew_shared PROPERTIES
+                                       PREFIX ""
 		                       RUNTIME_OUTPUT_NAME "glew"
 		                       LIBRARY_OUTPUT_NAME "glew"
 		                       DEBUG_POSTFIX d )
@@ -88,6 +99,7 @@ IF ( glew-cmake_BUILD_SHARED )
 		ADD_LIBRARY( libglewmx_shared SHARED ${LIBGLEW_SRCS} )
 
 		SET_TARGET_PROPERTIES( libglewmx_shared PROPERTIES
+                                       PREFIX ""
 		                       RUNTIME_OUTPUT_NAME "glewmx"
 		                       LIBRARY_OUTPUT_NAME "glewmx"
 		                       DEBUG_POSTFIX d )
